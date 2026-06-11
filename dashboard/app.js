@@ -20,6 +20,24 @@ const state = {
 const statusOrder = ["planned", "todo", "running", "submitted", "done", "failed", "risk"];
 const taskColumns = ["todo", "running", "blocked", "done"];
 
+const statusLabels = {
+  planned: "Planlandı",
+  todo: "Yapılacak",
+  running: "Çalışıyor",
+  submitted: "Submit edildi",
+  done: "Tamamlandı",
+  failed: "Başarısız",
+  risk: "Risk",
+  blocked: "Bloklu",
+  closed: "Kapandı",
+};
+
+const priorityLabels = {
+  high: "Yüksek",
+  medium: "Orta",
+  low: "Düşük",
+};
+
 function fmtScore(value) {
   if (value === null || value === undefined || value === "") return "-";
   return Number(value).toFixed(5).replace(/0+$/, "").replace(/\.$/, "");
@@ -36,6 +54,14 @@ function ownerName(id) {
   return state.team.find((member) => member.id === id)?.name || id || "-";
 }
 
+function statusLabel(status) {
+  return statusLabels[status] || status || "-";
+}
+
+function priorityLabel(priority) {
+  return priorityLabels[priority] || priority || "-";
+}
+
 function statusClass(status) {
   return `status ${String(status || "").toLowerCase()}`;
 }
@@ -46,7 +72,7 @@ function priorityRank(priority) {
 
 async function loadJson(path) {
   const response = await fetch(path, { cache: "no-store" });
-  if (!response.ok) throw new Error(`Failed to load ${path}`);
+  if (!response.ok) throw new Error(`${path} yüklenemedi`);
   return response.json();
 }
 
@@ -73,11 +99,11 @@ function renderMetrics() {
   const highHypotheses = state.hypotheses.filter((item) => item.priority === "high" && !["rejected", "validated"].includes(item.status)).length;
 
   const metrics = [
-    ["Experiments", state.experiments.length, `${submitted.length} submitted`],
-    ["Best local", fmtScore(bestLocal), "MSE"],
-    ["Best Kaggle", fmtScore(bestKaggle), "public MSE"],
-    ["Open tasks", openTasks, `${state.tasks.length} total`],
-    ["High hypotheses", highHypotheses, `${state.hypotheses.length} tracked`],
+    ["Deney", state.experiments.length, `${submitted.length} submit edildi`],
+    ["En iyi local", fmtScore(bestLocal), "MSE"],
+    ["En iyi Kaggle", fmtScore(bestKaggle), "public MSE"],
+    ["Açık iş", openTasks, `${state.tasks.length} toplam`],
+    ["Yüksek hipotez", highHypotheses, `${state.hypotheses.length} takipte`],
   ];
 
   document.getElementById("metricGrid").innerHTML = metrics
@@ -114,10 +140,10 @@ function renderFilters() {
   const statuses = [...new Set(state.experiments.map((run) => run.status).filter(Boolean))].sort(
     (a, b) => statusOrder.indexOf(a) - statusOrder.indexOf(b)
   );
-  statusFilter.innerHTML = `<option value="all">All status</option>${statuses
-    .map((status) => `<option value="${status}">${status}</option>`)
+  statusFilter.innerHTML = `<option value="all">Tüm durumlar</option>${statuses
+    .map((status) => `<option value="${status}">${statusLabel(status)}</option>`)
     .join("")}`;
-  ownerFilter.innerHTML = `<option value="all">All owners</option>${state.team
+  ownerFilter.innerHTML = `<option value="all">Tüm kişiler</option>${state.team
     .map((member) => `<option value="${member.id}">${member.name}</option>`)
     .join("")}`;
 }
@@ -131,12 +157,12 @@ function renderExperiments() {
       const files = fileBits.length ? fileBits.map((file) => `<div class="muted">${file}</div>`).join("") : '<span class="muted">-</span>';
       return `<tr>
         <td>
-          <div class="run-title">${run.id} · ${run.title}</div>
-          <div class="muted">${run.date} · ${run.cv_strategy || "-"}</div>
+          <div class="run-title">${run.id} - ${run.title}</div>
+          <div class="muted">${run.date} - ${run.cv_strategy || "-"}</div>
           <div class="tag-list">${tags}</div>
         </td>
         <td>${ownerName(run.owner)}</td>
-        <td><span class="${statusClass(run.status)}">${run.status || "-"}</span></td>
+        <td><span class="${statusClass(run.status)}">${statusLabel(run.status)}</span></td>
         <td>${run.model || "-"}</td>
         <td>${fmtScore(run.local_score)}</td>
         <td>${fmtScore(run.kaggle_public_score)}</td>
@@ -145,7 +171,7 @@ function renderExperiments() {
       </tr>`;
     })
     .join("");
-  document.getElementById("experimentRows").innerHTML = rows || `<tr><td colspan="8" class="empty">No matching runs.</td></tr>`;
+  document.getElementById("experimentRows").innerHTML = rows || `<tr><td colspan="8" class="empty">Eşleşen deney yok.</td></tr>`;
 }
 
 function renderHypotheses() {
@@ -156,13 +182,13 @@ function renderHypotheses() {
         <header>
           <div>
             <h3>${item.title}</h3>
-            <div class="muted">${item.id} · ${ownerName(item.owner)}</div>
+            <div class="muted">${item.id} - ${ownerName(item.owner)}</div>
           </div>
-          <span class="${statusClass(item.status)}">${item.status}</span>
+          <span class="${statusClass(item.status)}">${statusLabel(item.status)}</span>
         </header>
-        <div class="priority">${item.priority} priority</div>
+        <div class="priority">${priorityLabel(item.priority)} öncelik</div>
         <p>${item.evidence}</p>
-        <p><strong>Next:</strong> ${item.next_step}</p>
+        <p><strong>Sonraki adım:</strong> ${item.next_step}</p>
       </article>`
     )
     .join("");
@@ -182,15 +208,15 @@ function renderTasks() {
                 <strong>${task.title}</strong>
                 <div class="task-meta">
                   <span class="tag">${ownerName(task.owner)}</span>
-                  <span class="tag">${task.priority}</span>
+                  <span class="tag">${priorityLabel(task.priority)}</span>
                   <span class="tag">${task.due || "-"}</span>
                 </div>
                 ${task.linked_experiment ? `<div class="muted">${task.linked_experiment}</div>` : ""}
               </article>`
             )
             .join("")
-        : `<div class="empty">No tasks.</div>`;
-      return `<section class="task-column"><h3>${column}</h3><div class="task-list">${list}</div></section>`;
+        : `<div class="empty">Bu kolonda iş yok.</div>`;
+      return `<section class="task-column"><h3>${statusLabel(column)}</h3><div class="task-list">${list}</div></section>`;
     })
     .join("");
   document.getElementById("taskBoard").innerHTML = board;
@@ -206,7 +232,7 @@ function lineChart(container, runs) {
     .sort((a, b) => String(a.date).localeCompare(String(b.date)) || String(a.id).localeCompare(String(b.id)));
 
   if (!scored.length) {
-    container.innerHTML = `<div class="empty">No scored experiments yet.</div>`;
+    container.innerHTML = `<div class="empty">Henüz skorlu deney yok.</div>`;
     return;
   }
 
@@ -252,7 +278,7 @@ function lineChart(container, runs) {
     .map((run, i) => `<text x="${x(i)}" y="${height - 16}" font-size="10" text-anchor="middle" fill="#64717f">${run.id}</text>`)
     .join("");
 
-  container.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Score trend chart">
+  container.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Skor trend grafiği">
     ${grid}
     <line class="axis" x1="${pad.left}" x2="${width - pad.right}" y1="${height - pad.bottom}" y2="${height - pad.bottom}"></line>
     <line class="axis" x1="${pad.left}" x2="${pad.left}" y1="${pad.top}" y2="${height - pad.bottom}"></line>
@@ -284,10 +310,10 @@ function barChart(container, experiments) {
       const y = height - pad.bottom - h;
       return `<rect x="${x}" y="${y}" width="${Math.max(20, barWidth - 16)}" height="${h}" rx="4" fill="#246bfe"></rect>
         <text x="${x + Math.max(20, barWidth - 16) / 2}" y="${y - 6}" text-anchor="middle" font-size="12" fill="#17212b">${count}</text>
-        <text x="${x + Math.max(20, barWidth - 16) / 2}" y="${height - 18}" text-anchor="middle" font-size="11" fill="#64717f">${status}</text>`;
+        <text x="${x + Math.max(20, barWidth - 16) / 2}" y="${height - 18}" text-anchor="middle" font-size="11" fill="#64717f">${statusLabel(status)}</text>`;
     })
     .join("");
-  container.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Status bar chart">
+  container.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Durum çubuk grafiği">
     <line class="axis" x1="${pad.left}" x2="${width - pad.right}" y1="${height - pad.bottom}" y2="${height - pad.bottom}"></line>
     ${bars}
   </svg>`;
@@ -351,5 +377,5 @@ loadData()
     renderAll();
   })
   .catch((error) => {
-    document.body.innerHTML = `<main class="main" style="margin:0"><section class="section"><h2>Dashboard load failed</h2><pre>${error.message}</pre></section></main>`;
+    document.body.innerHTML = `<main class="main" style="margin:0"><section class="section"><h2>Dashboard yüklenemedi</h2><pre>${error.message}</pre></section></main>`;
   });

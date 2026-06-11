@@ -2,25 +2,25 @@
   {
     "id": "codex",
     "name": "Codex",
-    "role": "Pipeline / EDA / Tracking",
-    "focus": "Baseline, feature engineering, validation"
+    "role": "Pipeline / EDA / Takip",
+    "focus": "Baseline, feature engineering, validasyon"
   },
   {
     "id": "member-1",
-    "name": "Takim Uyesi 1",
-    "role": "Modeling",
-    "focus": "Tabular models"
+    "name": "Takım Üyesi 1",
+    "role": "Modelleme",
+    "focus": "Tabular modeller"
   },
   {
     "id": "member-2",
-    "name": "Takim Uyesi 2",
-    "role": "Text / Experiments",
-    "focus": "Mentor feedback text"
+    "name": "Takım Üyesi 2",
+    "role": "Metin / Deneyler",
+    "focus": "Mentor feedback metni"
   },
   {
     "id": "member-3",
-    "name": "Takim Uyesi 3",
-    "role": "Submission / Notes",
-    "focus": "Kaggle submissions and review"
+    "name": "Takım Üyesi 3",
+    "role": "Submission / Notlar",
+    "focus": "Kaggle submitleri ve skor takibi"
   }
 ]

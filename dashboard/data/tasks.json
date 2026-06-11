@@ -1,7 +1,7 @@
 [
   {
     "id": "t-001",
-    "title": "Create first reproducible CatBoost baseline",
+    "title": "İlk tekrar üretilebilir CatBoost baseline modelini kur",
     "owner": "member-1",
     "status": "todo",
     "priority": "high",
@@ -10,7 +10,7 @@
   },
   {
     "id": "t-002",
-    "title": "Train TF-IDF Ridge on mentor feedback",
+    "title": "Mentor feedback için TF-IDF Ridge modelini eğit",
     "owner": "member-2",
     "status": "todo",
     "priority": "high",
@@ -19,7 +19,7 @@
   },
   {
     "id": "t-003",
-    "title": "Define shared CV folds and seed policy",
+    "title": "Ortak CV foldlarını ve seed politikasını belirle",
     "owner": "codex",
     "status": "todo",
     "priority": "high",
@@ -28,7 +28,7 @@
   },
   {
     "id": "t-004",
-    "title": "Record first Kaggle public score",
+    "title": "İlk Kaggle public skorunu panele işle",
     "owner": "member-3",
     "status": "todo",
     "priority": "high",

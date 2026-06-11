@@ -3,7 +3,7 @@
     "id": "eda-001",
     "date": "2026-06-11",
     "owner": "codex",
-    "title": "Detailed EDA baseline",
+    "title": "Detaylı EDA ve ilk bulgular",
     "status": "done",
     "model": "EDA",
     "features": ["column_profile", "target_analysis", "drift", "mentor_text_terms"],
@@ -11,18 +11,18 @@
     "local_score": null,
     "kaggle_public_score": null,
     "kaggle_private_score": null,
-    "cv_strategy": "analysis-only",
+    "cv_strategy": "Sadece analiz",
     "submission_file": "",
     "notebook_or_script": "scripts/make_eda_report.py",
     "artifacts": ["reports/eda/eda_report.html", "reports/eda/eda_findings.md"],
     "hypotheses": ["h-project-quality", "h-text-tfidf", "h-role-fit"],
-    "notes": "Project quality, technical interview, portfolio/open-source/GitHub and technical score families carry the strongest initial signal. Academic fields are weak. Application/graduation years drift between train and test."
+    "notes": "En güçlü ilk sinyaller project_quality_score, technical_interview_score, portfolio/open-source/GitHub ve teknik skor ailelerinden geliyor. Akademik kolonlar zayıf. application_year ve graduation_year train/test arasında drift gösteriyor."
   },
   {
     "id": "baseline-001",
     "date": "2026-06-11",
     "owner": "member-1",
-    "title": "Planned CatBoost tabular baseline",
+    "title": "Planlanan CatBoost tabular baseline",
     "status": "planned",
     "model": "CatBoostRegressor",
     "features": ["raw_numeric", "raw_categorical", "missing_flags"],
@@ -35,13 +35,13 @@
     "notebook_or_script": "scripts/train_baseline.py",
     "artifacts": [],
     "hypotheses": ["h-project-quality", "h-missing-flags"],
-    "notes": "First reproducible model. No text features except dropping mentor_feedback_text."
+    "notes": "İlk tekrar üretilebilir model. mentor_feedback_text şimdilik modele eklenmeyecek."
   },
   {
     "id": "text-001",
     "date": "2026-06-11",
     "owner": "member-2",
-    "title": "Planned TF-IDF Ridge text model",
+    "title": "Planlanan TF-IDF Ridge metin modeli",
     "status": "planned",
     "model": "TF-IDF + Ridge",
     "features": ["mentor_feedback_text_unigram_bigram", "text_length"],
@@ -49,11 +49,11 @@
     "local_score": null,
     "kaggle_public_score": null,
     "kaggle_private_score": null,
-    "cv_strategy": "same folds as tabular baseline",
+    "cv_strategy": "Tabular baseline ile aynı foldlar",
     "submission_file": "",
     "notebook_or_script": "scripts/train_text_model.py",
     "artifacts": [],
     "hypotheses": ["h-text-tfidf"],
-    "notes": "Use separate text model and blend with tabular predictions. High/low target text contrast suggests TF-IDF signal."
+    "notes": "Ayrı metin modeli kurulacak ve tabular tahminlerle blend edilecek. Yüksek/düşük target çeyrekleri arasındaki kelime farkı TF-IDF sinyali olabileceğini gösteriyor."
   }
 ]

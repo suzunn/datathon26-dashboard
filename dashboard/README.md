@@ -1,34 +1,34 @@
-# Datathon 2026 Team Dashboard
+# Datathon 2026 Takım Paneli
 
-Static dashboard for tracking Datathon experiments, hypotheses, tasks, local CV scores, Kaggle public scores and artifact paths.
+Bu statik dashboard; deneyleri, hipotezleri, görevleri, local CV skorlarını, Kaggle public skorlarını ve dosya yollarını takım içinde ortak takip etmek için kullanılır.
 
-## Files
+## Dosyalar
 
-- `index.html`: dashboard UI
-- `styles.css`: dashboard styling
-- `app.js`: client-side rendering and charts
-- `data/experiments.json`: experiment log
-- `data/hypotheses.json`: hypothesis tracker
-- `data/tasks.json`: execution queue
-- `data/team.json`: team members
+- `index.html`: dashboard arayüzü
+- `styles.css`: görsel tasarım
+- `app.js`: tarayıcı tarafı render ve grafikler
+- `data/experiments.json`: deney kayıtları
+- `data/hypotheses.json`: hipotez takip listesi
+- `data/tasks.json`: takım iş listesi
+- `data/team.json`: takım üyeleri
 
-## Update Flow
+## Güncelleme Akışı
 
-1. Add or edit records under `dashboard/data/`.
-2. Commit and push.
-3. GitHub Pages refreshes the public dashboard.
+1. `dashboard/data/` altındaki JSON dosyalarını düzenle.
+2. Commit ve push yap.
+3. GitHub Pages dashboard'u otomatik günceller.
 
-Do not commit Kaggle raw data, full submissions, model binaries, notebooks with secrets, or private competition material. This repo is intended to publish metadata only.
+Kaggle ham verisini, tam submission dosyalarını, model dosyalarını, gizli bilgi içeren notebookları veya yarışmaya özel özel materyalleri commit etme. Bu repo sadece paylaşılabilir metadata içindir.
 
-## Local Preview
+## Local Önizleme
 
-From the repository root:
+Repo kök klasöründen:
 
 ```powershell
 .\.venv\Scripts\python.exe -m http.server 8010 -d dashboard
 ```
 
-Open:
+Aç:
 
 ```text
 http://localhost:8010

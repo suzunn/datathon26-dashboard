@@ -1,13 +1,13 @@
 # Datathon 2026 Dashboard
 
-Public metadata dashboard for coordinating team experiments, hypotheses, tasks and Kaggle scores.
+Takım deneylerini, hipotezleri, görevleri ve Kaggle skorlarını takip etmek için public metadata dashboard'u.
 
-Live site is deployed from `dashboard/` with GitHub Pages. Raw Kaggle data, submissions, model artifacts and local experiment outputs are intentionally ignored.
+Canlı site `dashboard/` klasöründen GitHub Pages ile yayınlanır. Ham Kaggle verisi, submission dosyaları, model çıktıları ve local deney artefaktları bilerek ignore edilir.
 
-Local preview:
+Local önizleme:
 
 ```powershell
 .\.venv\Scripts\python.exe -m http.server 8010 -d dashboard
 ```
 
-Then open `http://localhost:8010`.
+Sonra `http://localhost:8010` adresini aç.

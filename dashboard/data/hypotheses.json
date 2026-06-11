@@ -1,47 +1,47 @@
 [
   {
     "id": "h-project-quality",
-    "title": "Project quality is the main target driver",
+    "title": "Project quality ana hedef sürücüsü olabilir",
     "status": "validated_by_eda",
     "owner": "codex",
     "priority": "high",
-    "evidence": "project_quality_score Spearman correlation with target is about 0.564, strongest single numeric feature.",
-    "next_step": "Use as raw feature, test interactions with real_client_project_count, portfolio_score and technical_interview_score."
+    "evidence": "project_quality_score ile target arasındaki Spearman korelasyonu yaklaşık 0.564. Bu, en güçlü tek sayısal feature.",
+    "next_step": "Ham feature olarak kullan; real_client_project_count, portfolio_score ve technical_interview_score ile etkileşimlerini dene."
   },
   {
     "id": "h-role-fit",
-    "title": "Role-specific skill fit improves tabular models",
+    "title": "Rol bazlı beceri uyumu tabular modeli iyileştirebilir",
     "status": "open",
     "owner": "member-1",
     "priority": "high",
-    "evidence": "target_role is the strongest categorical feature; Cloud/MLOps/DevOps roles have higher mean target.",
-    "next_step": "Create target_role specific weighted technical score features."
+    "evidence": "target_role en güçlü kategorik kolon. Cloud/MLOps/DevOps rollerinin ortalama target skoru daha yüksek.",
+    "next_step": "target_role'a göre ağırlıklı teknik beceri skorları üret."
   },
   {
     "id": "h-text-tfidf",
-    "title": "Mentor text contains usable signal",
+    "title": "Mentor metni kullanılabilir sinyal taşıyor olabilir",
     "status": "open",
     "owner": "member-2",
     "priority": "high",
-    "evidence": "High target quartile uses terms like yuksek, basari, etkileyici, guclu more often; low target quartile uses practical-improvement terms more often.",
-    "next_step": "Train TF-IDF Ridge model and blend with tabular predictions."
+    "evidence": "Yüksek target çeyreğinde 'yüksek', 'başarı', 'etkileyici', 'güçlü' gibi ifadeler daha sık. Düşük target çeyreğinde geliştirme ihtiyacı belirten ifadeler daha sık.",
+    "next_step": "TF-IDF Ridge modeli eğit ve tabular tahminlerle blend et."
   },
   {
     "id": "h-missing-flags",
-    "title": "Missingness is informative",
+    "title": "Eksik değerler bilgi taşıyor olabilir",
     "status": "open",
     "owner": "member-1",
     "priority": "medium",
-    "evidence": "Internship duration, English score, GitHub stars, open-source contributions, HR interview and LinkedIn fields have structured missingness.",
-    "next_step": "Add missing indicator columns and compare CV."
+    "evidence": "Staj süresi, İngilizce skoru, GitHub yıldızı, açık kaynak katkısı, HR mülakat ve LinkedIn alanlarında yapısal eksiklik var.",
+    "next_step": "Eksik değer indicator kolonları ekle ve CV etkisini karşılaştır."
   },
   {
     "id": "h-year-drift",
-    "title": "Year drift can break naive validation",
+    "title": "Yıl drift'i naif validasyonu bozabilir",
     "status": "risk",
     "owner": "codex",
     "priority": "medium",
-    "evidence": "application_year and graduation_year have visible train/test drift; test years are newer on average.",
-    "next_step": "Track random KFold and year-based holdout scores."
+    "evidence": "application_year ve graduation_year train/test arasında belirgin drift gösteriyor; test tarafında daha yeni yıllar var.",
+    "next_step": "Random KFold skorunu yıl bazlı holdout skoru ile birlikte takip et."
   }
 ]

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Datathon 2026 Team Dashboard</title>
+    <title>Datathon 2026 Takım Paneli</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -12,18 +12,18 @@
         <span class="brand-mark">D26</span>
         <div>
           <h1>Datathon 2026</h1>
-          <p>Team dashboard</p>
+          <p>Takım takip paneli</p>
         </div>
       </div>
-      <nav class="nav" aria-label="Dashboard sections">
-        <a href="#overview" class="active">Overview</a>
-        <a href="#experiments">Experiments</a>
-        <a href="#hypotheses">Hypotheses</a>
-        <a href="#tasks">Tasks</a>
-        <a href="#data">Data</a>
+      <nav class="nav" aria-label="Panel bölümleri">
+        <a href="#overview" class="active">Özet</a>
+        <a href="#experiments">Deneyler</a>
+        <a href="#hypotheses">Hipotezler</a>
+        <a href="#tasks">İşler</a>
+        <a href="#data">Veri</a>
       </nav>
       <div class="sync-panel">
-        <span class="sync-label">Last sync</span>
+        <span class="sync-label">Son yükleme</span>
         <strong id="lastSync">-</strong>
       </div>
     </aside>
@@ -32,17 +32,17 @@
       <section id="overview" class="section section-tight">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Competition ops</p>
-            <h2>Shared progress</h2>
+            <p class="eyebrow">Yarışma operasyonu</p>
+            <h2>Ortak ilerleme</h2>
           </div>
           <div class="actions">
-            <button id="importBtn" type="button" title="Import dashboard JSON">
-              <span class="icon">↥</span>
-              Import
+            <button id="importBtn" type="button" title="Dashboard JSON dosyasını içe aktar">
+              <span class="icon">↑</span>
+              İçe aktar
             </button>
-            <button id="exportBtn" type="button" title="Export dashboard JSON">
-              <span class="icon">↧</span>
-              Export
+            <button id="exportBtn" type="button" title="Dashboard JSON dosyasını dışa aktar">
+              <span class="icon">↓</span>
+              Dışa aktar
             </button>
             <input id="fileInput" type="file" accept="application/json" hidden />
           </div>
@@ -53,15 +53,15 @@
         <div class="viz-grid">
           <section class="panel">
             <div class="panel-head">
-              <h3>Score trend</h3>
-              <span>MSE, lower is better</span>
+              <h3>Skor trendi</h3>
+              <span>MSE, düşük daha iyi</span>
             </div>
             <div id="scoreChart" class="chart"></div>
           </section>
           <section class="panel">
             <div class="panel-head">
-              <h3>Experiment mix</h3>
-              <span>Status distribution</span>
+              <h3>Deney dağılımı</h3>
+              <span>Durum dağılımı</span>
             </div>
             <div id="statusChart" class="chart compact"></div>
           </section>
@@ -71,16 +71,16 @@
       <section id="experiments" class="section">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Runs</p>
-            <h2>Experiment log</h2>
+            <p class="eyebrow">Çalışmalar</p>
+            <h2>Deney kayitlari</h2>
           </div>
           <div class="filters">
-            <input id="searchInput" type="search" placeholder="Search runs, files, notes" />
-            <select id="statusFilter" aria-label="Status filter">
-              <option value="all">All status</option>
+            <input id="searchInput" type="search" placeholder="Deney, dosya veya not ara" />
+            <select id="statusFilter" aria-label="Durum filtresi">
+              <option value="all">Tüm durumlar</option>
             </select>
-            <select id="ownerFilter" aria-label="Owner filter">
-              <option value="all">All owners</option>
+            <select id="ownerFilter" aria-label="Kişi filtresi">
+              <option value="all">Tüm kişiler</option>
             </select>
           </div>
         </div>
@@ -88,14 +88,14 @@
           <table>
             <thead>
               <tr>
-                <th>Run</th>
-                <th>Owner</th>
-                <th>Status</th>
+                <th>Deney</th>
+                <th>Sorumlu</th>
+                <th>Durum</th>
                 <th>Model</th>
                 <th>Local</th>
                 <th>Kaggle</th>
-                <th>Gap</th>
-                <th>Files</th>
+                <th>Fark</th>
+                <th>Dosyalar</th>
               </tr>
             </thead>
             <tbody id="experimentRows"></tbody>
@@ -106,8 +106,8 @@
       <section id="hypotheses" class="section">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Decision tracking</p>
-            <h2>Hypotheses</h2>
+            <p class="eyebrow">Karar takibi</p>
+            <h2>Hipotezler</h2>
           </div>
         </div>
         <div class="hypothesis-grid" id="hypothesisGrid"></div>
@@ -116,8 +116,8 @@
       <section id="tasks" class="section">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Execution</p>
-            <h2>Team queue</h2>
+            <p class="eyebrow">Uygulama</p>
+            <h2>Takım iş listesi</h2>
           </div>
         </div>
         <div class="task-board" id="taskBoard"></div>
@@ -126,8 +126,8 @@
       <section id="data" class="section">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Source files</p>
-            <h2>Dashboard data</h2>
+            <p class="eyebrow">Kaynak dosyalar</p>
+            <h2>Dashboard verisi</h2>
           </div>
         </div>
         <div class="data-grid">
@@ -136,12 +136,12 @@
             <pre id="experimentsPreview"></pre>
           </div>
           <div class="data-block">
-            <h3>Format</h3>
+            <h3>Yeni deney formatı</h3>
             <pre>{
   "id": "catboost-002",
   "date": "2026-06-12",
   "owner": "member-1",
-  "title": "CatBoost + role fit",
+  "title": "CatBoost + rol uyumu",
   "status": "submitted",
   "model": "CatBoostRegressor",
   "features": ["missing_flags", "role_fit"],
@@ -151,7 +151,7 @@
   "submission_file": "submissions/catboost_rolefit_002.csv",
   "notebook_or_script": "scripts/train_catboost.py",
   "hypotheses": ["h-role-fit"],
-  "notes": "CV improved vs baseline."
+  "notes": "CV skoru baseline'a göre iyileşti."
 }</pre>
           </div>
         </div>
