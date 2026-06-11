@@ -7,19 +7,19 @@
   },
   {
     "id": "member-1",
-    "name": "Takım Üyesi 1",
+    "name": "Süleyman",
     "role": "Modelleme",
     "focus": "Tabular modeller"
   },
   {
     "id": "member-2",
-    "name": "Takım Üyesi 2",
+    "name": "Rana",
     "role": "Metin / Deneyler",
     "focus": "Mentor feedback metni"
   },
   {
     "id": "member-3",
-    "name": "Takım Üyesi 3",
+    "name": "Talha",
     "role": "Submission / Notlar",
     "focus": "Kaggle submitleri ve skor takibi"
   }
