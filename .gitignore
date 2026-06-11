@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Kaggle competition data and generated submissions stay local.
+datalar/
+/data/
+submissions/
+experiments/
+*.csv
+*.parquet
+*.pkl
+*.joblib
+*.model
+
+# Local reports can be regenerated; dashboard has its own publishable assets.
+reports/eda/figures/
+reports/eda/*.xlsx
+
+# OS/editor noise.
+.DS_Store
+Thumbs.db

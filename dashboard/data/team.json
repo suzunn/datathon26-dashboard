@@ -1,0 +1,26 @@
+[
+  {
+    "id": "codex",
+    "name": "Codex",
+    "role": "Pipeline / EDA / Tracking",
+    "focus": "Baseline, feature engineering, validation"
+  },
+  {
+    "id": "member-1",
+    "name": "Takim Uyesi 1",
+    "role": "Modeling",
+    "focus": "Tabular models"
+  },
+  {
+    "id": "member-2",
+    "name": "Takim Uyesi 2",
+    "role": "Text / Experiments",
+    "focus": "Mentor feedback text"
+  },
+  {
+    "id": "member-3",
+    "name": "Takim Uyesi 3",
+    "role": "Submission / Notes",
+    "focus": "Kaggle submissions and review"
+  }
+]

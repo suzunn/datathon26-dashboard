@@ -1,0 +1,38 @@
+[
+  {
+    "id": "t-001",
+    "title": "Create first reproducible CatBoost baseline",
+    "owner": "member-1",
+    "status": "todo",
+    "priority": "high",
+    "due": "2026-06-11",
+    "linked_experiment": "baseline-001"
+  },
+  {
+    "id": "t-002",
+    "title": "Train TF-IDF Ridge on mentor feedback",
+    "owner": "member-2",
+    "status": "todo",
+    "priority": "high",
+    "due": "2026-06-12",
+    "linked_experiment": "text-001"
+  },
+  {
+    "id": "t-003",
+    "title": "Define shared CV folds and seed policy",
+    "owner": "codex",
+    "status": "todo",
+    "priority": "high",
+    "due": "2026-06-11",
+    "linked_experiment": ""
+  },
+  {
+    "id": "t-004",
+    "title": "Record first Kaggle public score",
+    "owner": "member-3",
+    "status": "todo",
+    "priority": "high",
+    "due": "2026-06-11",
+    "linked_experiment": "baseline-001"
+  }
+]

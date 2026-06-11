@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Datathon 2026 Team Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">D26</span>
+        <div>
+          <h1>Datathon 2026</h1>
+          <p>Team dashboard</p>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Dashboard sections">
+        <a href="#overview" class="active">Overview</a>
+        <a href="#experiments">Experiments</a>
+        <a href="#hypotheses">Hypotheses</a>
+        <a href="#tasks">Tasks</a>
+        <a href="#data">Data</a>
+      </nav>
+      <div class="sync-panel">
+        <span class="sync-label">Last sync</span>
+        <strong id="lastSync">-</strong>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section id="overview" class="section section-tight">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Competition ops</p>
+            <h2>Shared progress</h2>
+          </div>
+          <div class="actions">
+            <button id="importBtn" type="button" title="Import dashboard JSON">
+              <span class="icon">↥</span>
+              Import
+            </button>
+            <button id="exportBtn" type="button" title="Export dashboard JSON">
+              <span class="icon">↧</span>
+              Export
+            </button>
+            <input id="fileInput" type="file" accept="application/json" hidden />
+          </div>
+        </div>
+
+        <div class="metric-grid" id="metricGrid"></div>
+
+        <div class="viz-grid">
+          <section class="panel">
+            <div class="panel-head">
+              <h3>Score trend</h3>
+              <span>MSE, lower is better</span>
+            </div>
+            <div id="scoreChart" class="chart"></div>
+          </section>
+          <section class="panel">
+            <div class="panel-head">
+              <h3>Experiment mix</h3>
+              <span>Status distribution</span>
+            </div>
+            <div id="statusChart" class="chart compact"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="experiments" class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Runs</p>
+            <h2>Experiment log</h2>
+          </div>
+          <div class="filters">
+            <input id="searchInput" type="search" placeholder="Search runs, files, notes" />
+            <select id="statusFilter" aria-label="Status filter">
+              <option value="all">All status</option>
+            </select>
+            <select id="ownerFilter" aria-label="Owner filter">
+              <option value="all">All owners</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Run</th>
+                <th>Owner</th>
+                <th>Status</th>
+                <th>Model</th>
+                <th>Local</th>
+                <th>Kaggle</th>
+                <th>Gap</th>
+                <th>Files</th>
+              </tr>
+            </thead>
+            <tbody id="experimentRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="hypotheses" class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Decision tracking</p>
+            <h2>Hypotheses</h2>
+          </div>
+        </div>
+        <div class="hypothesis-grid" id="hypothesisGrid"></div>
+      </section>
+
+      <section id="tasks" class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Execution</p>
+            <h2>Team queue</h2>
+          </div>
+        </div>
+        <div class="task-board" id="taskBoard"></div>
+      </section>
+
+      <section id="data" class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Source files</p>
+            <h2>Dashboard data</h2>
+          </div>
+        </div>
+        <div class="data-grid">
+          <div class="data-block">
+            <h3>experiments.json</h3>
+            <pre id="experimentsPreview"></pre>
+          </div>
+          <div class="data-block">
+            <h3>Format</h3>
+            <pre>{
+  "id": "catboost-002",
+  "date": "2026-06-12",
+  "owner": "member-1",
+  "title": "CatBoost + role fit",
+  "status": "submitted",
+  "model": "CatBoostRegressor",
+  "features": ["missing_flags", "role_fit"],
+  "local_metric": "MSE",
+  "local_score": 18.42,
+  "kaggle_public_score": 19.10,
+  "submission_file": "submissions/catboost_rolefit_002.csv",
+  "notebook_or_script": "scripts/train_catboost.py",
+  "hypotheses": ["h-role-fit"],
+  "notes": "CV improved vs baseline."
+}</pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
