@@ -38,11 +38,24 @@ const priorityLabels = {
   low: "Düşük",
 };
 
+/**
+ * Format numeric leaderboard and validation scores for compact table output.
+ *
+ * @param {number|string|null|undefined} value Score value from dashboard data.
+ * @returns {string} Rounded score text or a placeholder when the value is empty.
+ */
 function fmtScore(value) {
   if (value === null || value === undefined || value === "") return "-";
   return Number(value).toFixed(5).replace(/0+$/, "").replace(/\.$/, "");
 }
 
+/**
+ * Calculate the public leaderboard gap against the local validation score.
+ *
+ * @param {number|string|null|undefined} local Local validation score.
+ * @param {number|string|null|undefined} kaggle Public Kaggle score.
+ * @returns {string} Signed score gap or a placeholder when either side is missing.
+ */
 function fmtGap(local, kaggle) {
   if (local === null || local === undefined || kaggle === null || kaggle === undefined) return "-";
   const diff = Number(kaggle) - Number(local);
@@ -50,6 +63,12 @@ function fmtGap(local, kaggle) {
   return `${sign}${diff.toFixed(5)}`;
 }
 
+/**
+ * Resolve a team member id to its display name.
+ *
+ * @param {string} id Team member id stored in dashboard JSON.
+ * @returns {string} Display name, raw id, or a placeholder.
+ */
 function ownerName(id) {
   return state.team.find((member) => member.id === id)?.name || id || "-";
 }
@@ -70,12 +89,24 @@ function priorityRank(priority) {
   return { high: 0, medium: 1, low: 2 }[priority] ?? 3;
 }
 
+/**
+ * Fetch one dashboard JSON file without using the browser cache.
+ *
+ * @param {string} path Relative JSON path under the dashboard root.
+ * @returns {Promise<unknown>} Parsed JSON payload.
+ * @throws {Error} When the static server cannot return the requested file.
+ */
 async function loadJson(path) {
   const response = await fetch(path, { cache: "no-store" });
   if (!response.ok) throw new Error(`${path} yüklenemedi`);
   return response.json();
 }
 
+/**
+ * Load every dashboard dataset into shared state before the first render.
+ *
+ * @returns {Promise<void>}
+ */
 async function loadData() {
   const [experiments, hypotheses, tasks, team] = await Promise.all([
     loadJson(DATA_PATHS.experiments),
@@ -111,6 +142,11 @@ function renderMetrics() {
     .join("");
 }
 
+/**
+ * Apply current search, status, and owner filters to experiment records.
+ *
+ * @returns {Array<object>} Experiments that match the active UI filters.
+ */
 function filteredExperiments() {
   const term = state.filters.search.trim().toLowerCase();
   return state.experiments.filter((run) => {
@@ -226,6 +262,13 @@ function renderPreviews() {
   document.getElementById("experimentsPreview").textContent = JSON.stringify(state.experiments.slice(0, 3), null, 2);
 }
 
+/**
+ * Render the local-vs-Kaggle score trend as an inline SVG line chart.
+ *
+ * @param {HTMLElement} container Chart mount element.
+ * @param {Array<object>} runs Experiment records from dashboard state.
+ * @returns {void}
+ */
 function lineChart(container, runs) {
   const scored = runs
     .filter((run) => run.local_score !== null || run.kaggle_public_score !== null)
@@ -292,6 +335,13 @@ function lineChart(container, runs) {
   </svg>`;
 }
 
+/**
+ * Render experiment counts by status as an inline SVG bar chart.
+ *
+ * @param {HTMLElement} container Chart mount element.
+ * @param {Array<object>} experiments Experiment records from dashboard state.
+ * @returns {void}
+ */
 function barChart(container, experiments) {
   const counts = experiments.reduce((acc, run) => {
     acc[run.status] = (acc[run.status] || 0) + 1;
